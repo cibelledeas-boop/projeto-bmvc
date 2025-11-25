@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1,
+        "nomeCompleto": "cin ddd s",
+        "dataNascimento": "2004-11-23",
+        "sexo": "feminino",
+        "estadoCivil": "solteiro",
+        "email": "cibelledea.s@gmail.com",
+        "telefone": "(38) 99932-7557",
+        "cpf": "174.994.196-14",
+        "rg": "23.172.555",
+        "pis": "444.44444.44-4",
+        "ctps": "17499419614",
+        "cep": "39480-000",
+        "uf": "MG",
+        "cidade": "Januária",
+        "bairro": "Lalala",
+        "logradouro": "avenida brasil",
+        "numero": "001",
+        "complemento": "apto",
+        "escolaridade": "medio",
+        "situacaoEmprego": "empregado",
+        "ocupacao": "analista",
+        "areaExperiencia": "tecnologia",
+        "nomeEmpresa": "cibellinha",
+        "nomeGerente": "julia",
+        "newsletter": true
+    }
+]

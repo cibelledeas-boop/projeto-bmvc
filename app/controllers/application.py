@@ -1,4 +1,5 @@
 from bottle import template
+from app.controllers.datarecord import DataRecord
 
 
 class Application():
@@ -9,29 +10,70 @@ class Application():
             'registers': self.registers,
             'login': self.login,
             'cadastro': self.cadastro,
-            'relatorios': self.relatorios
+            'relatorios': self.relatorios,
+            'pagina': self.pagina,
+            'lista_trabalhadores': self.lista_trabalhadores
         }
+        self.db = DataRecord()
 
 
-    def render(self,page):
+    def render(self, page, parameter=None):
        content = self.pages.get(page, self.helper)
+       if parameter:
+           return content(parameter)
        return content()
 
 
     def helper(self):
-        return template('app/views/html/helper')
+        return template('helper.tpl')
 
     def home(self):
-        return template('app/views/html/home.tpl')
+        return template('home.tpl')
     
     def registers(self):
-        return template('app/views/html/registers.tpl')
+        return template('registers.tpl')
     
     def login(self):
-        return template('app/views/html/login.tpl')
+        return template('login.tpl')
     
     def cadastro(self):
-        return template('app/views/html/cadastro.tpl')
+        return template('cadastro.tpl')
     
     def relatorios(self):
-        return template('app/views/html/relatorios.tpl')
+        return template('relatorios.tpl')
+
+    def pagina(self):
+        return template('pagina.tpl')
+
+    def lista_trabalhadores(self):
+        return template('lista_trabalhadores.tpl')
+
+    # Métodos para CRUD de Trabalhador
+
+    def create_trabalhador(self, dados):
+        """Cria um novo trabalhador"""
+        return self.db.create(dados)
+
+    def get_all_trabalhadores(self):
+        """Retorna todos os trabalhadores"""
+        return self.db.read_all()
+
+    def get_trabalhador(self, id):
+        """Busca um trabalhador pelo ID"""
+        return self.db.read_by_id(int(id))
+
+    def update_trabalhador(self, id, dados):
+        """Atualiza um trabalhador"""
+        return self.db.update(int(id), dados)
+
+    def delete_trabalhador(self, id):
+        """Deleta um trabalhador"""
+        return self.db.delete(int(id))
+
+    def trabalhador_exists(self, cpf):
+        """Verifica se um CPF já existe"""
+        return self.db.cpf_exists(cpf)
+
+    def search_trabalhadores(self, termo, campo='nomeCompleto'):
+        """Busca trabalhadores"""
+        return self.db.search(termo, campo)
