@@ -1,8 +1,20 @@
+
 from bottle import template
 from app.controllers.datarecord import DataRecord
 
 
 class Application():
+    def atualizar_senha(self, cpf, nova_senha):
+        trabalhador = self.db.read_by_cpf(cpf)
+        if trabalhador:
+            trabalhador.senha = nova_senha
+            if hasattr(trabalhador, 'primeiro_acesso'):
+                trabalhador.primeiro_acesso = False
+            else:
+                setattr(trabalhador, 'primeiro_acesso', False)
+            self.db.save()
+            return True
+        return False
 
     def __init__(self):
         self.pages = {
@@ -17,38 +29,52 @@ class Application():
         self.db = DataRecord()
 
 
-    def render(self, page, parameter=None):
-       content = self.pages.get(page, self.helper)
-       if parameter:
-           return content(parameter)
-       return content()
+    def render(self, page, parameter=None, **kwargs):
+        content = self.pages.get(page, self.helper)
+        if parameter:
+            return content(parameter, **kwargs)
+        return content(**kwargs)
 
 
-    def helper(self):
-        return template('helper.tpl')
 
-    def home(self):
-        return template('home.tpl')
-    
-    def registers(self):
-        return template('registers.tpl')
-    
-    def login(self):
-        return template('login.tpl')
-    
-    def cadastro(self):
-        return template('cadastro.tpl')
-    
-    def relatorios(self):
-        return template('relatorios.tpl')
+    def helper(self, **kwargs):
+        return template('helper.tpl', **kwargs)
 
-    def pagina(self):
-        return template('pagina.tpl')
+    def home(self, nome_usuario=None, **kwargs):
+        return template('home.tpl', nome_usuario=nome_usuario, **kwargs)
 
-    def lista_trabalhadores(self):
-        return template('lista_trabalhadores.tpl')
+    def registers(self, **kwargs):
+        return template('registers.tpl', **kwargs)
 
-    # Métodos para CRUD de Trabalhador
+    def login(self, erro=None, **kwargs):
+        return template('login.tpl', erro=erro, **kwargs)
+
+    def authenticate_user(self, cpf, senha):
+        print(f"[DEBUG] Autenticando CPF: {cpf} | Senha: {senha}")
+        trabalhador = self.db.read_by_cpf(cpf)
+        if trabalhador:
+            print(f"[DEBUG] Trabalhador encontrado: {trabalhador.cpf} | Senha salva: {getattr(trabalhador, 'senha', None)}")
+        else:
+            print("[DEBUG] Nenhum trabalhador encontrado para este CPF.")
+        if trabalhador and hasattr(trabalhador, 'senha') and trabalhador.senha == senha:
+            if hasattr(trabalhador, 'primeiro_acesso') and trabalhador.primeiro_acesso:
+                return 'primeiro_acesso'
+            return True
+        return False
+
+    def cadastro(self, **kwargs):
+        return template('cadastro.tpl', **kwargs)
+
+    def relatorios(self, **kwargs):
+        return template('relatorios.tpl', **kwargs)
+
+    def pagina(self, **kwargs):
+        return template('pagina.tpl', **kwargs)
+
+    def lista_trabalhadores(self, **kwargs):
+        return template('lista_trabalhadores.tpl', **kwargs)
+
+
 
     def create_trabalhador(self, dados):
         """Cria um novo trabalhador"""

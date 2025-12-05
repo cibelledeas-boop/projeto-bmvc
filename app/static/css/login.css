@@ -1,55 +1,204 @@
 * {
+  --gradient-bg: linear-gradient(135deg, #1c3faa, #7a5af8);
   box-sizing: border-box;
   margin: 0;
-  padding: 0;
-}
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--gradient-bg);
+    margin: 0;
+    padding: 0;
+  }
 
-:root {
-  --primary: #1c3faa;
-  --primary-dark: #16317a;
-  --secondary: #2952cc;
-  --bg-gradient: linear-gradient(135deg, #1c3faa, #7a5af8);
-  --card-bg: #fff;
-  --muted: #516e8a;
-  --border: #e6ecff;
-  --danger: #dc3545;
-}
+  .page {
+    width: 100%;
+    max-width: 400px;
+    margin: 40px auto;
+  }
 
-body {
-  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-  min-height: 100vh;
-  background: var(--bg-gradient);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 36px;
-}
+  .card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px #0001;
+    padding: 32px 24px;
+  }
 
-.page {
-  width: 100%;
-  max-width: 480px;
-}
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
 
-.card {
-  background: var(--card-bg);
-  border-radius: 12px;
-  padding: 32px;
-  box-shadow: 0 8px 30px rgba(28, 63, 170, 0.18);
-}
+  .brand-icon {
+    font-size: 2rem;
+  }
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 18px;
-}
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-align: center;
+  }
 
-.brand-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #2952cc, #7a5af8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  .subtitle {
+    color: #555;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .label {
+    font-size: 1rem;
+    color: #222;
+    font-weight: 500;
+  }
+
+  .login-form input[type="text"],
+  .login-form input[type="password"] {
+    padding: 10px 12px;
+    border: 1px solid #d0d7e2;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #f7faff;
+  }
+
+  .login-form input:focus {
+    border: 1.5px solid #1c3faa;
+    outline: none;
+  }
+
+  .password-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .toggle-senha {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: #1c3faa;
+    padding: 0 6px;
+  }
+
+  .row.between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .checkbox-inline {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.98rem;
+  }
+
+  .link {
+    color: #1c3faa;
+    text-decoration: none;
+    font-size: 0.98rem;
+  }
+  .link:hover {
+    color: #2952cc;
+  }
+
+  .btn {
+    padding: 10px 0;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+    background: #1c3faa;
+    color: #fff;
+    transition: background 0.2s;
+  }
+  .btn.primary:hover {
+    background: #16317a;
+  }
+  .btn.secondary {
+    background: #f7faff;
+    color: #1c3faa;
+    border: 1px solid #d0d7e2;
+  }
+  .btn.secondary:hover {
+    background: #e6ecff;
+  }
+
+  .divider {
+    text-align: center;
+    color: #888;
+    margin: 18px 0 0 0;
+    font-size: 0.98rem;
+  }
+
+  .erro {
+    color: #dc3545;
+    background: #fff0f1;
+    border: 1px solid #ffd6db;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .required {
+    color: #dc3545;
+    font-weight: 700;
+    margin-left: 2px;
+  }
+
+  .note {
+    color: #888;
+    font-size: 0.95rem;
+    margin-top: 18px;
+    text-align: center;
+  }
+  
+  .logo_login {
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 2px solid #fff;
+  }
+  .logo_login img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 600px) {
+    .card {
+      padding: 12px 2vw 18px 2vw;
+      border-radius: 10px;
+    }
+    .title {
+      font-size: 1.2rem;
+    }
+    .brand {
+      margin-bottom: 10px;
+    }
+    .page {
+      max-width: 98vw;
+      margin: 0;
+    }
+  }
 }

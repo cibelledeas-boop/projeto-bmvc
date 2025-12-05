@@ -3,7 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../static/css/home.css">
+    <link rel="stylesheet" href="/static/css/home.css">
+    <title>cjSolutions</title>
+</head>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/home.css">
     <title>cjSolutions</title>
 </head>
 
@@ -17,18 +26,19 @@
         </div>
     </header>
 
-    
     <nav class="menu">
         <h2 id="h2-menu">Ponto</h2>
         <button type="button"><i data-lucide="clock"></i> Registrar Ponto</button>
-        <button type="button"><i data-lucide="list"></i> Meus Registros</button>
-        <button type="button"><i data-lucide="bar-chart-2"></i> Relatórios</button>
+        <a href="/registers" class="menu-link"><button type="button"><i data-lucide="list"></i> Meus Registros</button></a>
+        % if nome_usuario in ['Julia', 'Cibelle']:
+            <a href="/relatorios" class="menu-link"><button type="button"><i data-lucide="bar-chart-2"></i> Relatórios</button></a>
+        % end
     </nav>
 
     <main class="ponto">
     
         <div class="saudacao-container">
-            <span id="saudacao"></span>
+            <h1 class="title" style="color: #174ea6;">Olá, {{nome_usuario if nome_usuario else 'usuário'}}</h1>
         </div>
 
         <section class="relogio">
@@ -41,6 +51,7 @@
     </main>
 
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="../../static/js/home.js"></script>
+    <script src="/static/js/home.js"></script>
 </body>
 </html>
+        <h2 id="h2-menu">Ponto</h2>

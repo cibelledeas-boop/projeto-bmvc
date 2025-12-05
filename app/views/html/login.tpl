@@ -4,20 +4,25 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Portal do Trabalhador — Login</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="/static/css/login.css">
 </head>
 <body>
     <main class="page">
         <div class="card">
             <div class="brand">
-                <div class="brand-icon">🏢</div>
+                <div class="logo_login">
+                    <img src="/static/img/logocj.jpg" alt="Logo cjSolutions">
+                </div>
                 <div class="brand-title">Portal do Trabalhador</div>
             </div>
 
             <h1 class="title">Bem-vindo de volta</h1>
             <p class="subtitle">Entre com suas credenciais para acessar o portal</p>
 
-            <form id="loginForm" class="login-form" autocomplete="off">
+            % if erro:
+                <div class="erro">{{erro}}</div>
+            % end
+            <form id="loginForm" class="login-form" autocomplete="off" method="post" action="/login">
                 <label class="field">
                     <span class="label">CPF</span>
                     <input id="cpf" name="cpf" type="text" inputmode="numeric" placeholder="000.000.000-00" autocomplete="username" required>
@@ -42,17 +47,12 @@
 
                 <button class="btn primary" type="submit">Entrar</button>
 
-                <div class="divider">
-                    <span>Não tem uma conta?</span>
-                </div>
-
-                <button type="button" class="btn secondary">Criar nova conta</button>
 
                 <p class="note">Para sua segurança, nunca compartilhe sua senha. Em caso de dúvidas, entre em contato com o suporte.</p>
             </form>
         </div>
     </main>
 
-    <script src="login.js"></script>
+    <!-- <script src="/static/js/login.js"></script> -->
 </body>
 </html>
